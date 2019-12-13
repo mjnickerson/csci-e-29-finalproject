@@ -2,6 +2,7 @@ from tkinter import *
 from gui.guiparts import blank_node_box
 from gui.guicommands import generate_graph, run_graph
 
+
 #local GUI Functions
 def clicked(): #TEST CLICK FUNCTION
     entered_text = textentry.get()
@@ -65,15 +66,15 @@ Label(lui_gui_window, text="Boto Credentials:", fg="black", bg=node_color, font=
 Label(lui_gui_window, text="Access ID:", fg="black", bg=node_color, font="Verdana 10 italic", width=node_width).grid(row=6, column=node_column, sticky=W)
 node1_credentials_user = Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
 node1_credentials_user.grid(row=7, column=node_column)
-node1_credentials_user.insert(END, ' >')
+node1_credentials_user.insert(END, ' > ')
 Label(lui_gui_window, text="Secret Key:", fg="black", bg=node_color, font="Verdana 10 italic", width=node_width).grid(row=8, column=node_column, sticky=W)
 node1_credentials_pass = Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
 node1_credentials_pass.grid(row=9, column=node_column)
-node1_credentials_pass.insert(END, ' >')
+node1_credentials_pass.insert(END, ' > ')
 Label(lui_gui_window, text=" ", fg="black", bg=node_color, font="Verdana 14 bold").grid(row=10, column=node_column, sticky=W) #blank
 Label(lui_gui_window, text=" S3 Target Address:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=11, column=node_column, sticky=W)
 node1_target_entry = Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
-node1_target_entry.insert(END, ' s3://')
+node1_target_entry.insert(END, ' s3:// ')
 node1_target_entry.grid(row=12, column=node_column) #note: cannot combine these together functionally, or the Entry will return None
 
 #node 2
@@ -82,18 +83,23 @@ node_width = 15
 node_color = "lightblue"
 blank_node_box(lui_gui_window, node_start, node_end, node_color, node_width, node_column) #blank
 Label(lui_gui_window, text="External Task", fg="black", bg=node_color, width=node_width, font="Verdana 14 bold").grid(row=3, column=node_column, sticky=W)
-
+Label(lui_gui_window, text="Params:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W)
+Label(lui_gui_window, text="Output:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=11, column=node_column, sticky=W)
 
 #node 3
 node_column = 5
 node_width = 15
 node_color = "blue"
+fg_color= "white"
 blank_node_box(lui_gui_window, node_start, node_end, node_color, node_width, node_column) #blank
-Label(lui_gui_window, text="Task", fg="white", bg=node_color, width=node_width, font="Verdana 14 bold").grid(row=3, column=node_column, sticky=W)
-Label(lui_gui_window, text="Run:", fg="white", bg=node_color, font="Verdana 12", width=node_width).grid(row=7, column=node_column, sticky=W)
+Label(lui_gui_window, text="Task", fg=fg_color, bg=node_color, width=node_width, font="Verdana 14 bold").grid(row=3, column=node_column, sticky=W)
+Label(lui_gui_window, text="Params:", fg=fg_color, bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W)
+Label(lui_gui_window, text="Run:", fg=fg_color, bg=node_color, font="Verdana 12", width=node_width).grid(row=7, column=node_column, sticky=W)
 node3_target_entry = Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, fg="white", font="Verdana 8 bold")
-node3_target_entry.insert(END, ' >')
+node3_target_entry.insert(END, ' > ')
 node3_target_entry.grid(row=8, column=node_column)
+Label(lui_gui_window, text="Output:", fg=fg_color, bg=node_color, font="Verdana 12", width=node_width).grid(row=11, column=node_column, sticky=W)
+
 
 #node 4
 node_column = 7
@@ -101,10 +107,12 @@ node_width = 20
 node_color = "lightblue"
 blank_node_box(lui_gui_window, node_start, node_end, node_color, node_width, node_column) #blank
 Label(lui_gui_window, text="External Program Task", width=node_width, fg="black", bg=node_color, font="Verdana 14 bold").grid(row=3, column=node_column, sticky=W)
+Label(lui_gui_window, text="Params:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W)
 Label(lui_gui_window, text="CLI Arguments:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=7, column=node_column, sticky=W)
 node4_target_entry = Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
-node4_target_entry.insert(END, ' >')
+node4_target_entry.insert(END, ' > ')
 node4_target_entry.grid(row=8, column=node_column)
+Label(lui_gui_window, text="Output:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=11, column=node_column, sticky=W)
 
 #node 5
 node_column = 9
@@ -112,10 +120,12 @@ node_width = 15
 node_color = "lavender"
 blank_node_box(lui_gui_window, node_start, node_end, node_color, node_width, node_column) #blank
 Label(lui_gui_window, text="Local Target", width=node_width, fg="black", bg=node_color, font="Verdana 14 bold").grid(row=3, column=node_column, sticky=W)
+Label(lui_gui_window, text="Params:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W)
 Label(lui_gui_window, text="Folder:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=7, column=node_column, sticky=W)
 node5_target_entry = Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
-node5_target_entry.insert(END, '  ../')
+node5_target_entry.insert(END, '  ../ ')
 node5_target_entry.grid(row=8, column=node_column)
+Label(lui_gui_window, text="Output:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=11, column=node_column, sticky=W)
 
 
 # Execution Buttons

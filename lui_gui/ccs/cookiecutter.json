@@ -11,5 +11,7 @@
     "release_date": "{% now 'local' %}",
     "version": "0.0.0",
     "_extensions": ["jinja2_time.TimeExtension"],
-    "install_csci_utils" : ["yes", "no"]
+    "install_csci_utils" : ["yes", "no"],
+    "aws_access_id": "access_id",
+    "aws_secret_key": "Shhhh..... SECRET"
 }
