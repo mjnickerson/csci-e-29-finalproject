@@ -10,7 +10,9 @@ def test_script():
         print(i," Mississippi")
 
 def generate_graph():
-    print("This is a placeholder to GENERATE Luigi graph")
+    print("GENERATING Luigi graph...")
+    #ccs
+    print("Done!")
 
 def run_graph():
     # if THE COOKIECUTTER DIRECTORY EXISTS:
@@ -18,4 +20,6 @@ def run_graph():
     # else if the directory does not exist:
         # print that the script cannot be run
         # MUST BE A POP UP WINDOW!
-    print("This is a placehold to run the Luigi graph, IF its generated")
+    print("BUILDING Luigi graph...")
+    # check execution process
+    print("RUNNING Luigi graph...")
