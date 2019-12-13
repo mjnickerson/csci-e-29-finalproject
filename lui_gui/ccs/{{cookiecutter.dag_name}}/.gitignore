@@ -108,8 +108,4 @@ venv.bak/
 .idea
 .png
 notes.txt
-
-/project_notes.txt
 /.gitkeep
-/temp_files/
-/data/
