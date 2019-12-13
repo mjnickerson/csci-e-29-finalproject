@@ -1,17 +1,29 @@
 {
+    "graph_type" : ["New Project", "Model Process"],
     "full_name": "Your name",
     "email": "Your address email (eq. you@example.com)",
-    "Year_and_Semester": "2019fa",
-    "github_organization_name": "csci-e-29",
-    "github_local_username": "Local Username within Organization",
+
     "project_name": "Nameless",
-    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
-    "dag_name": "{{ cookiecutter.Year_and_Semester.lower().replace(' ', '_') }}-{{ cookiecutter.project_name.lower().replace(' ', '_') }}-{{ cookiecutter.github_local_username.lower().replace(' ', '_') }}",
-    "project_short_description": "A short description of the project",
+    "dag_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+
+    "dag_short_description": "A short description of the project",
+
+    "node_1": "Node 1",
+    "node_2": "Node 2",
+    "node_3": "Node 3",
+    "node_4": "Node 5",
+    "node_5": "Node 5",
+
+    "node3_run_target": "s3_atomic_download",
+    "node4_run_target": "python -m model_process",
+
+    "node1_target_entry": "s3://",
+    "node3_output_folder": "output/",
+    "node5_target_output": "output/",
+
     "release_date": "{% now 'local' %}",
-    "version": "0.0.0",
-    "_extensions": ["jinja2_time.TimeExtension"],
-    "install_csci_utils" : ["yes", "no"],
-    "aws_access_id": "access_id",
-    "aws_secret_key": "Shhhh..... SECRET"
+    "version": "1.0.0",
+
+    "node_1_aws_access_id": "access_id",
+    "node_1_aws_secret_key": "Shhhh..... SECRET"
 }
