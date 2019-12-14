@@ -23,3 +23,6 @@ def run_graph():
     print("BUILDING Luigi graph...")
     # check execution process
     print("RUNNING Luigi graph...")
+
+def delete_graph():
+    print("Bye Bye Graph.")
