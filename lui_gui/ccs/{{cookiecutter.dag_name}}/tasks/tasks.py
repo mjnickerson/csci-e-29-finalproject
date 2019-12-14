@@ -24,12 +24,13 @@ class Run_lui_gui(WrapperTask):
 
 class {{cookiecutter.node_2}}(ExternalTask):
     # Fetch S3Target for External File on S3
-    MODEL_ROOT = os.environ.get("MODEL_ROOT")  # Root S3 path, as a constant
+    file_ROOT = os.environ.get("FILE_ROOT")  # Root S3 path, as a constant
 
     model = Parameter() # Filename of the model under the root s3 path
 
+
     def output(self):
-        return S3Target(os.path.join(self.MODEL_ROOT, self.model),format=format.Nop) #this is node_1
+        return S3Target({{cookiecutter.node1_target_entry}},format=format.Nop) #this is node_1
 
 
 class {{cookiecutter.node_3}}(Task):
@@ -51,7 +52,7 @@ class {{cookiecutter.node_3}}(Task):
 
     def output(self):
         self.LOCAL_ROOT = os.path.abspath(self.root) #set root directory for LocalTarget
-        return LocalTarget((os.path.join(self.LOCAL_ROOT, self.SHARED_RELATIVE_PATH, self.file)),format=format.Nop)
+        return LocalTarget({{cookiecutter.node3_output_folder}}, self.file)),format=format.Nop)
 
 
 class {{cookiecutter.node_4}}(ExternalProgramTask):
@@ -61,30 +62,28 @@ class {{cookiecutter.node_4}}(ExternalProgramTask):
     file = Parameter() #file name
     root = Parameter()  #subdirectory for model
     LOCAL_ROOT = os.path.abspath("temp_run_stylize_subdir")
-    output_dir_name = 'stylized_images'
+    output_dir_name = {{cookiecutter.node5_target_output}}
     output_dir = (os.path.join(LOCAL_ROOT, output_dir_name))
 
 
     def requires(self):
-        """ Requires Model and Image already downloaded
+        """ Requires Node 2 already downloaded
         :return model: Local Target of Model
-        :return image: Local Target of Image
-        Note: passes Luigi Parameters for model and image
+        Note: passes Luigi Parameters for model
         """
         return {
             'model': {{cookiecutter.node_3}}(self.file, self.root),
         }
 
-
     def program_args(self):
         """ Command line arguments to call torch model
         :return args: CLI args
         """
-        return ['python','-m','neural_style', 'eval', '--content-image', os.path.join(self.LOCAL_ROOT, {{cookiecutter.node_3}}.SHARED_RELATIVE_PATH, self.image) ,'--model',
-                os.path.join(self.LOCAL_ROOT, {{cookiecutter.node_3}}.SHARED_RELATIVE_PATH, self.file) ,'--output-image', self.temp_output_path ,'--cuda', '0']
+        return [{{cookiecutter.node4_run_target}}, os.path.join(self.LOCAL_ROOT, {{cookiecutter.node_3}}.SHARED_RELATIVE_PATH, self.image) ,'--file',
+                os.path.join(self.LOCAL_ROOT, {{cookiecutter.node_3}}.SHARED_RELATIVE_PATH, self.file) ,'--output-file', self.temp_output_path ]
 
     def run(self):
-        # torch neural_style write does not create missing directories
+        # create missing directories
         if not os.path.exists(self.output_dir):  # if missing
             os.makedirs(self.output_dir) # create dir
         with self.output().temporary_path() as self.temp_output_path: # atomic write
@@ -95,4 +94,4 @@ class {{cookiecutter.node_4}}(ExternalProgramTask):
         self.output_dir = (os.path.join(self.LOCAL_ROOT, self.output_dir_name)) #set output directory for SufPresLocTarg
         # return SuffixPreservingLocalTarget of the stylized image
         output_file_name = (os.path.splitext(self.file)[0]+"_processed")
-        return SuffixPreservingLocalTarget(os.path.join(self.output_dir, output_file_name),format=format.Nop)
+        return SuffixPreservingLocalTarget({{cookiecutter.node5_target_output}},format=format.Nop)

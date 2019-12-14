@@ -7,9 +7,10 @@ parser.add_argument("-i", "--image", default="luigi.jpg") # what torch model to 
 parser.add_argument("-m", "--model", default="mosaic.pth") # what image to stylize
 parser.add_argument("-r", "--root", default="data") # subdirectory for model
 
+
 def main_script(args=None):
     args = parser.parse_args(args=args)
 
     build([
-        Run_lui_gui(args.model, args.image, args.root)
+        Run_lui_gui(args.model, args.root)
     ], local_scheduler=True)
