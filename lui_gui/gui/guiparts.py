@@ -1,11 +1,12 @@
 from tkinter import *
+from tkinter import messagebox
 from random import *
+
 
 def blank_node_box(window, box_start, box_end, node_col, node_wid, nod_color):
     for row_blank in range(box_start, (box_end+1), 1):  # blank header
         Label(window, text=" ", fg="black", bg=node_col, width=node_wid, font="Verdana 14 bold").grid(
             row=row_blank, column=nod_color, sticky=W)  # blank
-
 
 class credits_window:
     """
@@ -27,6 +28,8 @@ class credits_window:
         self.mainlabel.place(relx=0.5, rely=0.5, anchor=CENTER)
         self.sublabel = Label(self.master_window, text="a demo graphic user interface to generate luigi graphs using metaprogramming", fg=self.textcolor, bg=self.background)
         self.sublabel.place(relx=0.5, rely=0.65, anchor=CENTER)
+        self.versionlab = Label(self.master_window, text="Version 1.0.0 ALPHA", fg=self.textcolor, bg=self.background)
+        self.versionlab.place(relx=0.5, rely=0.75, anchor=CENTER)
         self.label2 = Label(self.master_window, text="PROJECT CREDITS:", fg=self.textcolor, bg=self.background)
         self.label2.place(relx=0.03, rely=0.90, anchor=W)
         self.label3 = Label(self.master_window, text="ADV. PYTHON - CSCI-E-29 FINAL PROJECT - FALL 2019 - MICAH NICKERSON", fg=self.textcolor, bg=self.background)
@@ -39,7 +42,7 @@ class credits_window:
 
     def get_down(self):
         print("\nJump Up,\nJump Up,\nand Get Down!\n")
-        self.btoo.place(relx=0.5, rely=0.85, anchor=CENTER)
+        self.btoo.place(relx=0.6, rely=0.85, anchor=CENTER)
 
     def jump(self):
         print("")
@@ -49,5 +52,21 @@ class credits_window:
         self.label2.destroy()
         self.mainlabel.destroy()
         self.sublabel.destroy()
+        self.versionlab.destroy()
         self.label3.destroy()
         self.b.place(relx=random(), rely=random())
+
+
+def warning_graph_exists():
+    print("Graph Already Exists!")
+    messagebox.showinfo("Warning!", "Cannot create Graph - that folder already exists!")
+
+
+def warning_no_folder():
+    print("That folder does not exist!")
+    messagebox.showinfo("Warning!", "Cannot destroy Graph - that folder does not exist!")
+
+
+def warning_no_graph():
+    print("Cannot Run: Graph does not exist")
+    messagebox.showinfo("Warning!", "Cannot Run Graph - it does not exist!")

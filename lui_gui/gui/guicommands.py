@@ -1,28 +1,40 @@
+import os
 from tkinter import *
+
 
 """
 This py file is a library of Graphic Interface commands that run LuiGUI.
 """
 
-def test_script():
+def test_script(): #TEST BUTTON FUNCTION
     print("Testing this script")
     for i in range(1,20,1):
         print(i," Mississippi")
 
-def generate_graph():
-    print("GENERATING Luigi graph...")
-    #ccs
-    print("Done!")
 
-def run_graph():
-    # if THE COOKIECUTTER DIRECTORY EXISTS:
-        # RUN THE SHELL SCRIPT TO BUILD
-    # else if the directory does not exist:
-        # print that the script cannot be run
-        # MUST BE A POP UP WINDOW!
-    print("BUILDING Luigi graph...")
-    # check execution process
-    print("RUNNING Luigi graph...")
+def test_clicked(): #TEST CLICK FUNCTION
+    """
+    This is a test function, that will be abandoned.
+    """
+    entered_text = textentry.get()
+    if entered_text:
+        print("The value is %s." % str(entered_text))
+    else:
+        print("Nothing was entered.")
 
-def delete_graph():
-    print("Bye Bye Graph.")
+
+def update_field(fieldname,newmessage):
+    fieldname.delete(0, END) #clear existing root declaration
+    fieldname.insert(END, str(newmessage)) #add new text
+
+
+def graph_path(path_entry, name_entry):
+    """
+    :param path_entry: Entry field, for root path, holding a value to get()
+    :param name_entry: Entry field, for graph directory name, holding a value to get()
+    :return: a string of the complete graph directory path
+    """
+    check_dir = os.path.join(path_entry.get(),(name_entry.get().replace(" ", "_"))) #collapse name with no spaces
+    return check_dir
+
+
