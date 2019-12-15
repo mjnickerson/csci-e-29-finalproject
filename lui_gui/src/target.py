@@ -3,7 +3,7 @@ import io
 from contextlib import contextmanager
 from luigi.local_target import LocalTarget, atomic_file
 from luigi.format import FileWrapper, get_default_format
-from lui_gui.src import get_file_path
+from lui_gui.src.tools import get_file_path
 
 
 class suffix_preserving_atomic_file(atomic_file):

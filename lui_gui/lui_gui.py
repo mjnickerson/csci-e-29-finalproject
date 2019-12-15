@@ -24,7 +24,7 @@ def new_winF(): # new window definition
 def reset_gui():
     """
     For TA Review purposes, fills values into a format that will pass
-    :return:
+    :return: updates all the fields to defaults for easy running
     """
     update_field(graph_name_entry, 'pset-4')
     update_field(graph_root_entry, os.path.join(os.getcwd(),'graphs'))
@@ -115,10 +115,12 @@ def generate_graph():
     node1_target_gen = node1_target_entry.get().replace(" ", "_")
     node2_name_gen = node2_name.get().replace(" ", "_")
     node3_name_gen = node3_name.get().replace(" ", "_")
-    node3_run_gen = get_file_path(node3_run_target.get().replace(" ", "_"), True) #get path (ditch extensions)
+    # TODO: NEED TO PARSE PATH HERE FOR LOADING OTHER MODULES
+    node3_run_gen = get_file_path(os.path.basename(node3_run_target.get().replace(" ", "_")), True) #get just module name (ditch path and extensions)
     node3_output_folder_gen = node3_output_folder.get().replace(" ", "_")
     node4_name_gen = node4_name.get().replace(" ", "_")
-    node4_run_gen = get_file_path(node4_run_target.get().replace(" ", "_"), True) #get path (ditch extensions)
+    # TODO: NEED TO PARSE PATH HERE FOR LOADING OTHER MODULES
+    node4_run_gen = get_file_path(node4_run_target.get().replace(" ", "_"), True) #get path (ditch extensions) #TODO: MAY NEED TO DITCH PATH TO RUN A SCRIPT
     node5_name_gen = node5_name.get().replace(" ", "_")
     node5_target_output_gen = node5_target_output.get().replace(" ", "_")
 
@@ -175,7 +177,7 @@ def call_cookiecutter(full_path, root_path, cc_kwargs_dict, dir_exists=False):
     :param root_path: root path for cookiecutter, to install into
     :param cc_kwargs_dict: dictionary of user inputs from GUI
     :param dir_exists: boolean flag if the dictionary exists (to install within an existing dictionary)
-    :return:
+    :return: calls cookiecutter function
     """
     if dir_exists: # if empty directory exists
         root_path = full_path #install inside the existing folder
@@ -196,7 +198,7 @@ def run_graph():
             print("\nRUNNING Luigi graph...\n")
             run_command = ('pipenv run python "' + os.path.join(check_dir,graph_name_entry.get().lower().replace(" ", "_") + '_graph"'))
             print(run_command)
-            os.system(run_command)
+            os.system(run_command) # run graph on the command line
         else:
             warning_no_graph() #warn the user it can't run, no graph
 
