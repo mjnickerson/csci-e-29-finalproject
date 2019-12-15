@@ -3,13 +3,13 @@ import io
 from contextlib import contextmanager
 from luigi.local_target import LocalTarget, atomic_file
 from luigi.format import FileWrapper, get_default_format
-from lui_gui.io import get_file_path
+from lui_gui.src import get_file_path
 
 
 class suffix_preserving_atomic_file(atomic_file):
     def generate_tmp_path(self, path):
         #keep base file extensions
-        return (((get_file_path(path,True) + '-io-tmp-%09d' + (get_file_path(path,False))) % random.randrange(0, 1e10)))
+        return (((get_file_path(path,True) + '-src-tmp-%09d' + (get_file_path(path,False))) % random.randrange(0, 1e10)))
 
 
 class BaseAtomicProviderLocalTarget(LocalTarget):
