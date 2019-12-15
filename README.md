@@ -30,11 +30,32 @@ Test | Badge
 **Conclusion** - Through exploration, we find that graphic visualizations as part of pipeline graph assembly and design are practical and beneficial, especially for data science team members with weaker coding skills. We find a graphic interfaces paired with cookiecutter or jinja are a doorway to improving cookiecutter’s usefulness. While they remain primarily text based, graph creation that involves some visual diagram component can template the skeleton of a DAG rapidly, and reduce the amount of manual input to deploy a workflow pipeline.
 
 -----
+
 **Running** -
+
+1) Clone this repository.
+
+2) This project uses pipenv as a virtual environment.
+To deploy the venv shell: `$ pipenv install`
+If there are technical issues locking the file, try `$ pipenv install --ignore-pipfile`
+
+3) To run **Lui_GUI**: `$ pipenv run python lui_gui/lui_gui.py`
+
+4) Lui_GUI will use this directory as the root by default;
+New Luigi graphs will be output to this directory by default, in the folder `/graphs`
+You can change this by entering or selecting a different graph path in the interface.
+
+5) 
+
+6) 
+
+7)
+
+8)
 
 -----
 **FAQ** -
 
 -----
 
-[Micah Nickerson](min021@g.harvard.edu) - [Harvard University Extension](https://www.extension.harvard.edu/academics/graduate-degrees/data-science-degree) - Fall 2019
+[Micah Nickerson](mailto:min021@g.harvard.edu) - [Harvard University Extension](https://www.extension.harvard.edu/academics/graduate-degrees/data-science-degree) - Fall 2019
