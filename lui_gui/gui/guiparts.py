@@ -58,15 +58,15 @@ class credits_window:
 
 
 def warning_graph_exists():
-    print("Graph Already Exists!")
+    print("\nGraph Already Exists!")
     messagebox.showinfo("Warning!", "Cannot create Graph - that folder already exists!")
 
 
 def warning_no_folder():
-    print("That folder does not exist!")
+    print("\nThat folder does not exist!")
     messagebox.showinfo("Warning!", "Cannot destroy Graph - that folder does not exist!")
 
 
 def warning_no_graph():
-    print("Cannot Run: Graph does not exist")
+    print("\nCannot Run: Graph does not exist")
     messagebox.showinfo("Warning!", "Cannot Run Graph - it does not exist!")

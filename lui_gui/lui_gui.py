@@ -187,21 +187,24 @@ def call_cookiecutter(full_path, root_path, cc_kwargs_dict, dir_exists=False):
     print("\nDone!")
 
 
-
 def run_graph():
     check_dir = graph_path(graph_root_entry, graph_name_entry)
     if no_fields_empty(): #if the path is complete
         if os.path.exists(check_dir): #and dir exists
-            print("BUILDING Luigi graph...")
+            print("\nBUILDING Luigi graph...")
             # check execution process
-            print("RUNNING Luigi graph...")
+            print("\nRUNNING Luigi graph...\n")
+            run_command = ('pipenv run python "' + os.path.join(check_dir,graph_name_entry.get().lower().replace(" ", "_") + '_graph"'))
+            print(run_command)
+            os.system(run_command)
         else:
             warning_no_graph() #warn the user it can't run, no graph
+
 
 def delete_graph():
     check_dir = graph_path(graph_root_entry, graph_name_entry)
     if os.path.exists(check_dir): #if user says yes
-        print("Bye Bye Graph - deleting graph %s" % check_dir)
+        print("\nBye Bye Graph - deleting graph %s" % check_dir)
         #######################
         #### DANGER ZONE: #####
         # Here lies the ability to delete important stuff without mercy!

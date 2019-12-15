@@ -18,9 +18,9 @@ def test_clicked(): #TEST CLICK FUNCTION
     """
     entered_text = textentry.get()
     if entered_text:
-        print("The value is %s." % str(entered_text))
+        print("\nThe value is %s." % str(entered_text))
     else:
-        print("Nothing was entered.")
+        print("\nNothing was entered.")
 
 
 def update_field(fieldname,newmessage):
