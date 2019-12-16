@@ -21,15 +21,14 @@ Test | Badge
 *Travis CI* | [![Build Status](https://travis-ci.com/mjnickerson/csci-e-29-finalproject.svg?token=Sg4NLLafiHfmBCvPrLC5&branch=master)](https://travis-ci.com/mjnickerson/csci-e-29-finalproject)
 
 -----
-
 Concept Wireframe:
 
-![luiGUI Concept](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_concept.jpg)
+![luiGUI Concept](https://github.com/mjnickerson/csci-e-29-finalproject/blob/master/data/input/resources/luiGUI_concept.jpg?raw=true)
 
 
 Version 1.0.0:
 
-![luiGUI Screenshot](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_screenshot.jpg)
+![luiGUI Screenshot](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_screenshot.jpg?raw=true)
 
 -----
 
@@ -118,7 +117,7 @@ it can be accessed here: **https://github.com/mjnickerson/cookiecutter-luiGUI**
 **References:**
 
 *Block Logic*
-![Concept Nodeblocks](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_block_logic.jpg)
+![Concept Nodeblocks](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_block_logic.jpg?raw=true)
 
 -----
 
