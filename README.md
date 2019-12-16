@@ -24,12 +24,12 @@ Test | Badge
 
 Concept Wireframe:
 
-![luiGUI Concept](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_concept.jpg?token=AMM4XDAZZXFXBCECLI22G5S565JGO)
+![luiGUI Concept](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_concept.jpg)
 
 
 Version 1.0.0:
 
-![luiGUI Screenshot](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_screenshot.jpg?token=AMM4XDFNZRHAFAP2ZOFFELC565JI6)
+![luiGUI Screenshot](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_screenshot.jpg)
 
 -----
 
@@ -118,7 +118,7 @@ it can be accessed here: **https://github.com/mjnickerson/cookiecutter-luiGUI**
 **References:**
 
 *Block Logic*
-![Concept Nodeblocks](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_block_logic.jpg?token=AMM4XDDBMH7U2EVQBMOHA2C565JLI)
+![Concept Nodeblocks](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_block_logic.jpg)
 
 -----
 
