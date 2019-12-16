@@ -11,7 +11,7 @@
 **Project Presentation / Concept Deck:**
 https://drive.google.com/file/d/1HgUKMXPtUP3CI8sYotqr5AYzqXTCdgud/view
 
-*For information on planned later stages of this project, please see the GUI concept in the link above.*
+*For information on planned la**ter stages of this project, please see the GUI concept in the link above.*
  
 ------
 **Build Badges**
