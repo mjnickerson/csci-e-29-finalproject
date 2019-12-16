@@ -21,23 +21,25 @@ def close_gui(): #exit function
 def new_winF(): # new window definition
     credits_window(lui_gui_window)
 
-def reset_gui():
+
+def example_gui():
     """
-    For TA Review purposes, fills values into a format that will pass
+    For TA Review purposes, fills values into a demonstration format
     :return: updates all the fields to defaults for easy running
     """
-    update_field(graph_name_entry, 'pset-4')
+    update_field(graph_name_entry, 'Watermark Example')
     update_field(graph_root_entry, os.path.join(os.getcwd(),'graphs'))
-    update_field(node1_name, 'Pset Data')
-    update_field(node_1_aws_access_id, ' > ')
-    update_field(node_1_aws_secret_key, ' > ')
-    update_field(node1_target_entry, 's3://pset-4-data-mjnickerson/pset_4/')
+    update_field(node1_name, 'Cloud Data')
+    update_field(node_1_aws_access_id, '')
+    update_field(node_1_aws_secret_key, '')
+    update_field(node1_target_entry, 's3://lui-gui-demo-data/images/luigi_trans.png')
     update_field(node2_name, 'S3 Download')
-    update_field(node3_name, 'Atomic Download')
-    update_field(node3_run_target, os.path.join(os.getcwd(),'lui_gui','src','s3_atomic_download.py'))
-    update_field(node3_output_folder, os.path.join(os.getcwd(),'data','input'))
-    update_field(node4_name, 'StylizeImage')
-    update_field(node4_run_target, ' > ')
+    update_field(node3_name, 'Watermark Atomic Download')
+    update_field(node3_run_target, os.path.join(os.getcwd(),'scripts','s3_atomic_download.py'))
+    update_field(node3_output_folder, os.path.join(os.getcwd(),'data','input','watermark'))
+    update_field(node4_name, 'Add Watermark Top Left')
+    update_field(node4_input_params, os.path.join(os.getcwd(),'data','input','images'))
+    update_field(node4_run_target, 'python scripts/watermark.py')
     update_field(node5_name, 'Save Local')
     update_field(node5_target_output, os.path.join(os.getcwd(),'data','output'))
 
@@ -97,6 +99,20 @@ def set_node_3_run_target():
     print(set_3_script)
     update_field(node3_run_target, set_3_script)
 
+def set_node_4_run_target():
+    set_4_script = filedialog.askopenfilename(parent=lui_gui_window,
+                                 initialdir=os.getcwd(),
+                                 title="Select script to run:",
+                                 filetypes=allowed_filetypes)
+    print(set_4_script)
+    update_field(node4_run_target, set_4_script)
+
+def set_node_4_input_params():
+    set_4_params = filedialog.askdirectory(parent=lui_gui_window,
+                                 initialdir=os.getcwd(),
+                                 title="Select input parameters or folder:")
+    print(set_4_params)
+    update_field(node4_input_params, set_4_params)
 
 ######################
 # PLACEHOLDER FOR THREE KEY FUNCTIONS:
@@ -105,8 +121,10 @@ def generate_graph():
     verbose = False #diagnostics flag, for checking kwargs
 
     #set environmental variables
-    os.environ['node_1_aws_access_id'] = node_1_aws_access_id.get()
-    os.environ['node_1_aws_secret_key'] = node_1_aws_secret_key.get()
+    if node_1_aws_access_id.get():
+        os.environ['node_1_aws_access_id'] = node_1_aws_access_id.get()
+    if node_1_aws_secret_key.get():
+        os.environ['node_1_aws_secret_key'] = node_1_aws_secret_key.get()
 
     #GET GENERATOR PARAMETERS
     graph_root_gen = graph_root_entry.get()
@@ -119,8 +137,9 @@ def generate_graph():
     node3_run_gen = get_file_path(os.path.basename(node3_run_target.get().replace(" ", "_")), True) #get just module name (ditch path and extensions)
     node3_output_folder_gen = node3_output_folder.get().replace(" ", "_")
     node4_name_gen = node4_name.get().replace(" ", "_")
+    node4_input_params_gen = node4_input_params.get()
     # TODO: NEED TO PARSE PATH HERE FOR LOADING OTHER MODULES
-    node4_run_gen = get_file_path(node4_run_target.get().replace(" ", "_"), True) #get path (ditch extensions) #TODO: MAY NEED TO DITCH PATH TO RUN A SCRIPT
+    node4_run_gen = node4_run_target.get()
     node5_name_gen = node5_name.get().replace(" ", "_")
     node5_target_output_gen = node5_target_output.get().replace(" ", "_")
 
@@ -135,6 +154,7 @@ def generate_graph():
         print(node3_run_gen)
         print(node3_output_folder_gen)
         print(node4_name_gen)
+        print(node4_input_params)
         print(node4_run_gen)
         print(node5_name_gen)
         print(node5_target_output_gen)
@@ -153,6 +173,7 @@ def generate_graph():
         "node4_run_target": node4_run_gen,
         "node1_target_entry": node1_target_gen,
         "node3_output_folder": node3_output_folder_gen,
+        "node4_input_params": node4_input_params_gen,
         "node5_target_output": node5_target_output_gen,
         "release_date": date.today().strftime("%d/%m/%Y"),
         "version": "1.0.0",
@@ -363,10 +384,17 @@ node4_name = Entry(lui_gui_window, width=round(node_width), bg=node_color, font=
 node4_name.grid(row=4, column=node_column)
 node4_name.insert(END, ' Node 4')
 Label(lui_gui_window, text="Params:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W)
+node4_input_params= Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
+node4_input_params.insert(END, ' > ')
+node4_input_params.grid(row=6, column=node_column)
+node4_input_params_but = Button(lui_gui_window, text="^", fg="black", bg=node_color, font="Verdana 10 bold", command=set_node_4_input_params)
+node4_input_params_but.grid(row=6, column=node_column, sticky=E)
 Label(lui_gui_window, text="CLI Arguments:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=7, column=node_column, sticky=W)
 node4_run_target= Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
 node4_run_target.insert(END, ' > ')
 node4_run_target.grid(row=8, column=node_column)
+node4_target_output_but = Button(lui_gui_window, text="^", fg="black", bg=node_color, font="Verdana 10 bold", command=set_node_4_run_target)
+node4_target_output_but.grid(row=8, column=node_column, sticky=E)
 Label(lui_gui_window, text="Output:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=11, column=node_column, sticky=W)
 
 ############################################
@@ -385,9 +413,9 @@ Label(lui_gui_window, text="Folder:", fg="black", bg=node_color, font="Verdana 1
 node5_target_output = Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
 node5_target_output.insert(END, '  ../ ')
 node5_target_output.grid(row=8, column=node_column)
-
-node_5_output_but = Button(lui_gui_window, text="^", fg="black", bg=node_color, font="Verdana 10 bold", command=set_output_directory)
+node_5_output_but = Button(lui_gui_window, text="^", fg="black", bg=node_color, font="Verdana 8 bold", command=set_output_directory)
 node_5_output_but.grid(row=8, column=node_column, sticky=E)
+
 
 Label(lui_gui_window, text="Output:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=11, column=node_column, sticky=W)
 
@@ -402,8 +430,8 @@ but_exit.grid(row=2, column=11, sticky=W)
 but_del = Button(lui_gui_window, text="> Delete Graph! <", fg="red", font="Verdana 10 bold", width=but_width, command=try_delete)
 but_del.grid(row=4, column=11, sticky=W)
 
-but_defaults = Button(lui_gui_window, text="> Default Example <", font="Verdana 10", width=21, command=reset_gui)
-but_defaults.grid(row=6, column=11, sticky=W)
+but_example = Button(lui_gui_window, text="> Default Example <", font="Verdana 10", width=21, command=example_gui)
+but_example.grid(row=6, column=11, sticky=W)
 
 but_generate = Button(lui_gui_window, text="> Generate Graph! <", font="Verdana 10 bold", width=but_width, command=generate_graph)
 but_generate.grid(row=10, column=11, sticky=W)

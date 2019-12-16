@@ -15,6 +15,7 @@ atomicwrites= "*"
 luigi = "*"
 boto3 = "*"
 cookiecutter = "*"
+pillow = "*"
 
 
 [requires]

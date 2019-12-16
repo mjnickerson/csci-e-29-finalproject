@@ -49,12 +49,21 @@ You can change this by entering or selecting a different graph path in the inter
 
 6) 
 
-7)
+7) Load a demo example by selecting 
 
 8)
 
+
+**Cookie Cutter Repo:**
+This project has a public sister repo that holds the cookiecutter code to generate luigi DAG's - it can be accessed here: https://github.com/mjnickerson/cookiecutter-luiGUI
+
+
+*Optionally*, if desired it can also be called via cookiecutter on any CLI by `cookiecutter https://github.com/mjnickerson/cookiecutter-luiGUI`
+
+
 -----
 **FAQ** -
+
 
 -----
 
