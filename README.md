@@ -52,16 +52,16 @@ You can change this by entering or selecting a different graph path in the inter
 6) Scripts  must be located in the folder named `scripts` to run; Future functionality will allow for adaptive naming pathways.
 
 
+-----
 **Cookie Cutter Repo:**
 This project has a public sister repo that holds the cookiecutter code to generate luigi DAG's - it can be accessed here: https://github.com/mjnickerson/cookiecutter-luiGUI
 
 
 *Optionally*, if desired it can also be called via cookiecutter on any CLI by `cookiecutter https://github.com/mjnickerson/cookiecutter-luiGUI`
 
-
 -----
-**Notes** -
 
+**Notes** -
 
 -----
 
