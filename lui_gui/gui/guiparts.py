@@ -66,7 +66,18 @@ def warning_no_folder():
     print("\nThat folder does not exist!")
     messagebox.showinfo("Warning!", "Cannot destroy Graph - that folder does not exist!")
 
-
 def warning_no_graph():
     print("\nCannot Run: Graph does not exist")
     messagebox.showinfo("Warning!", "Cannot Run Graph - it does not exist!")
+
+def warning_task_missing():
+    print("\nCannot Run: Task is missing main script")
+    messagebox.showinfo("Warning!", "Cannot Run Graph - TASK is missing a script!\n\nExternalProgramTask can be left blank, but Task MUST have a script to execute.")
+
+def warning_node_name_missing():
+    print("\nCannot Run: Node Name is Empty")
+    messagebox.showinfo("Warning!", "Cannot Run Graph - a Required Node Name is Empty!")
+
+def warning_output_target_missing():
+    print("\nCannot Run: Required Target is not Specified")
+    messagebox.showinfo("Warning!", "Cannot Run Graph - Required Target is NOT specified!")

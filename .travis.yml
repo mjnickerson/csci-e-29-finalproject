@@ -12,8 +12,6 @@ install:
 
 stages:
   - test
-  - name: answers
-    if: branch = master
 
 jobs:
   include:
@@ -28,7 +26,3 @@ jobs:
       script: pytest --cov-report xml --cov-report term
       after_script:
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-    - stage: answers
-      script:
-      # Reminder: credentials must be entered on Travis CI
-      - python3 -m lui_gui
