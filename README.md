@@ -28,7 +28,7 @@ Concept Wireframe:
 
 Version 1.0.0:
 
-![luiGUI Screenshot](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_screenshot.jpg?raw=true)
+![luiGUI Screenshot](https://github.com/mjnickerson/csci-e-29-finalproject/blob/master/data/input/resources/luiGUI_screenshot.jpg?raw=true)
 
 -----
 
@@ -114,10 +114,11 @@ it can be accessed here: **https://github.com/mjnickerson/cookiecutter-luiGUI**
     - atomicwrites
     - pillow
 -----
+-----
 **References:**
 
 *Block Logic*
-![Concept Nodeblocks](https://raw.githubusercontent.com/mjnickerson/csci-e-29-finalproject/master/data/input/resources/luiGUI_block_logic.jpg?raw=true)
+![Concept Nodeblocks](https://github.com/mjnickerson/csci-e-29-finalproject/blob/master/data/input/resources/luiGUI_block_logic.jpg?raw=true)
 
 -----
 
