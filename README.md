@@ -1,6 +1,7 @@
 # LuiGUI Project (alpha)
 
-###Building Luigi Pipelines using a Graphic User Interface and Metaprogramming
+### Building Luigi Pipelines using a Graphic User Interface and Metaprogramming
+
 *Generating Directed Acyclic Graphs using tkinter and CookieCutter*
 
 ------
@@ -21,6 +22,17 @@ Test | Badge
 
 -----
 
+Concept Wireframe:
+
+![luiGUI Concept](data/input/resources/luiGUI concept.jpg)
+
+
+Version 1.0.0:
+
+![luiGUI Screenshot](data/input/resources/luiGUI screenshot.jpg)
+
+-----
+
 **Background** -  Directed acyclic graphs (DAG) are best introduced and expressed graphically, yet the construction of a DAG with Luigi is an entirely text (code) based process. Constructing large graphs would be simplified if they could be visualized (how parameters are assigned, and args are passed downstream) and then templated using user inputs. Luigi is ripe for a robust templating system that allows faster declaration of the targets and connecting them via nodes. Luigi has a visualizer, but it only allows the user to see the graph after it is built and running, which limits effective experimentation and error checking. An ideal solution is a Graphic User Interface – a simple drag and drop “node graph” approach or prefabricated fill in visualizers can be useful tools. Cookie cutter is explored to automatically generate a luigi graph using GUI inputs.
 
   
@@ -29,7 +41,7 @@ Test | Badge
 
  
 
-**Conclusion** - Through exploration, we find that graphic visualizations as part of pipeline graph assembly and design are practical and beneficial, especially for data science team members with weaker coding skills. We find a graphic interfaces paired with cookiecutter or jinja are a doorway to improving cookiecutter’s usefulness. While they remain primarily text based, graph creation that involves some visual diagram component can template the skeleton of a DAG rapidly, and reduce the amount of manual input to deploy a workflow pipeline. We also find by controlling metaprogramming from a GUI, graphs can be as easily discarded as they can be created. Through this, **luigi graphs become a rapid extension to our existing daily data science workflows** - code that exists only for as long as it is are useful, and then dissapears. 
+**Conclusion** - Through exploration, we find that graphic visualizations as part of pipeline graph assembly and design are practical and beneficial, especially for data science team members with weaker coding skills. We find a graphic interfaces paired with cookiecutter or jinja are a doorway to improving cookiecutter’s usefulness. While they remain primarily text based, graph creation that involves some visual diagram component can template the skeleton of a DAG rapidly, and reduce the amount of manual input to deploy a workflow pipeline. We also find by controlling metaprogramming from a GUI, graphs can be as easily discarded as they can be created. Through this, **luigi graphs become a rapid extension to our existing daily data science workflows** - code that exists only for as long as it is are useful, and then disappears. 
 
 -----
 
@@ -100,6 +112,12 @@ This project has a public sister repo that holds the cookiecutter code to genera
     - cython
     - atomicwrites
     - pillow
+-----
+**References:**
+
+*Block Logic*
+![Concept Nodeblocks](data/input/resources/luiGUI block logic.jpg)
+
 -----
 
 [Micah Nickerson](mailto:min021@g.harvard.edu) - [Harvard University Extension](https://www.extension.harvard.edu/academics/graduate-degrees/data-science-degree) - Fall 2019
