@@ -35,11 +35,12 @@ def example_gui():
     update_field(node1_target_entry, 's3://lui-gui-demo-data/images/luigi_trans.png')
     update_field(node2_name, 'S3 Download')
     update_field(node3_name, 'Watermark Atomic Download')
+    update_field(node3_input_params, ' >')
     update_field(node3_run_target, os.path.join(os.getcwd(),'scripts','s3_atomic_download.py'))
     update_field(node3_output_folder, os.path.join(os.getcwd(),'data','input','watermark'))
     update_field(node4_name, 'Add Watermark Top Left')
-    update_field(node4_input_params, os.path.join(os.getcwd(),'data','input','images'))
-    update_field(node4_run_target, 'python scripts/watermark.py')
+    update_field(node4_input_params, os.path.join(os.getcwd(),'data','input','images','hackathon.jpg'))
+    update_field(node4_run_target, 'scripts/watermark.py')
     update_field(node5_name, 'Save Local')
     update_field(node5_target_output, os.path.join(os.getcwd(),'data','output'))
 
@@ -96,22 +97,31 @@ def set_node_3_run_target():
                                  initialdir=os.getcwd(),
                                  title="Select script to run:",
                                  filetypes=allowed_filetypes)
-    print(set_3_script)
+    print(set_3_script) #diagnostics
     update_field(node3_run_target, set_3_script)
+
+def set_node3_input_params():
+    set_3_params = filedialog.askopenfilename(parent=lui_gui_window,
+                                 initialdir=os.getcwd(),
+                                 title="Select input parameters or folder:",
+                                 filetypes=allowed_filetypes)
+    print(set_3_params) #diagnostics
+    update_field(node3_input_params, set_3_params)
 
 def set_node_4_run_target():
     set_4_script = filedialog.askopenfilename(parent=lui_gui_window,
                                  initialdir=os.getcwd(),
                                  title="Select script to run:",
                                  filetypes=allowed_filetypes)
-    print(set_4_script)
+    print(set_4_script) #diagnostics
     update_field(node4_run_target, set_4_script)
 
 def set_node_4_input_params():
-    set_4_params = filedialog.askdirectory(parent=lui_gui_window,
+    set_4_params = filedialog.askopenfilename(parent=lui_gui_window,
                                  initialdir=os.getcwd(),
-                                 title="Select input parameters or folder:")
-    print(set_4_params)
+                                 title="Select input parameters or folder:",
+                                 filetypes=allowed_filetypes)
+    print(set_4_params) #diagnostics
     update_field(node4_input_params, set_4_params)
 
 ######################
@@ -126,22 +136,25 @@ def generate_graph():
     if node_1_aws_secret_key.get():
         os.environ['node_1_aws_secret_key'] = node_1_aws_secret_key.get()
 
+
     #GET GENERATOR PARAMETERS
     graph_root_gen = graph_root_entry.get()
     graph_name_gen = graph_name_entry.get().lower().replace(" ", "_")
     node1_name_gen = node1_name.get().replace(" ", "_")
-    node1_target_gen = node1_target_entry.get().replace(" ", "_")
+    node1_target_gen = node1_target_entry.get()
+    node1_target_filename = os.path.basename(node1_target_gen) #get target file name
     node2_name_gen = node2_name.get().replace(" ", "_")
     node3_name_gen = node3_name.get().replace(" ", "_")
     # TODO: NEED TO PARSE PATH HERE FOR LOADING OTHER MODULES
     node3_run_gen = get_file_path(os.path.basename(node3_run_target.get().replace(" ", "_")), True) #get just module name (ditch path and extensions)
-    node3_output_folder_gen = node3_output_folder.get().replace(" ", "_")
+    node3_output_folder_gen = node3_output_folder.get()
     node4_name_gen = node4_name.get().replace(" ", "_")
     node4_input_params_gen = node4_input_params.get()
     # TODO: NEED TO PARSE PATH HERE FOR LOADING OTHER MODULES
     node4_run_gen = node4_run_target.get()
     node5_name_gen = node5_name.get().replace(" ", "_")
-    node5_target_output_gen = node5_target_output.get().replace(" ", "_")
+    node5_target_output_gen = node5_target_output.get()
+
 
     #diagnostics print
     if verbose:
@@ -149,12 +162,13 @@ def generate_graph():
         print(graph_root_gen)
         print(node1_name_gen)
         print(node1_target_gen)
+        print(node1_target_filename)
         print(node2_name_gen)
         print(node3_name_gen)
         print(node3_run_gen)
         print(node3_output_folder_gen)
         print(node4_name_gen)
-        print(node4_input_params)
+        print(node4_input_params_gen)
         print(node4_run_gen)
         print(node5_name_gen)
         print(node5_target_output_gen)
@@ -172,6 +186,7 @@ def generate_graph():
         "node3_run_target": node3_run_gen,
         "node4_run_target": node4_run_gen,
         "node1_target_entry": node1_target_gen,
+        "node1_target_filename": node1_target_filename,
         "node3_output_folder": node3_output_folder_gen,
         "node4_input_params": node4_input_params_gen,
         "node5_target_output": node5_target_output_gen,
@@ -341,7 +356,7 @@ node2_name.grid(row=4, column=node_column)
 node2_name.insert(END, ' Node 2')
 Label(lui_gui_window, text="Params:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W)
 Label(lui_gui_window, text="Output:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=11, column=node_column, sticky=W)
-
+Label(lui_gui_window, text="                -->", fg="black", bg=node_color, font="Verdana 12 bold", width=node_width).grid(row=12, column=node_column, sticky=W)
 ############################################
 
 #node 3
@@ -357,6 +372,11 @@ node3_name.grid(row=4, column=node_column)
 node3_name.insert(END, ' Node 3')
 
 Label(lui_gui_window, text="Params:", fg=fg_color, bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W)
+node3_input_params= Entry(lui_gui_window, width=round(node_width*1.5), fg=fg_color, bg=node_color, font="Verdana 8 bold")
+node3_input_params.insert(END, ' > ')
+node3_input_params.grid(row=6, column=node_column)
+node3_input_params_but = Button(lui_gui_window, text="^", fg=fg_color, bg=node_color, font="Verdana 8 bold", command=set_node3_input_params)
+node3_input_params_but.grid(row=6, column=node_column, sticky=E)
 
 Label(lui_gui_window, text="Run:", fg=fg_color, bg=node_color, font="Verdana 12", width=node_width).grid(row=7, column=node_column, sticky=W)
 node3_run_target = Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, fg="white", font="Verdana 8 bold")
@@ -387,16 +407,16 @@ Label(lui_gui_window, text="Params:", fg="black", bg=node_color, font="Verdana 1
 node4_input_params= Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
 node4_input_params.insert(END, ' > ')
 node4_input_params.grid(row=6, column=node_column)
-node4_input_params_but = Button(lui_gui_window, text="^", fg="black", bg=node_color, font="Verdana 10 bold", command=set_node_4_input_params)
+node4_input_params_but = Button(lui_gui_window, text="^", fg="black", bg=node_color, font="Verdana 8 bold", command=set_node_4_input_params)
 node4_input_params_but.grid(row=6, column=node_column, sticky=E)
-Label(lui_gui_window, text="CLI Arguments:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=7, column=node_column, sticky=W)
+Label(lui_gui_window, text="CLI Script / Arguments:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=7, column=node_column, sticky=W)
 node4_run_target= Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
 node4_run_target.insert(END, ' > ')
 node4_run_target.grid(row=8, column=node_column)
-node4_target_output_but = Button(lui_gui_window, text="^", fg="black", bg=node_color, font="Verdana 10 bold", command=set_node_4_run_target)
+node4_target_output_but = Button(lui_gui_window, text="^", fg="black", bg=node_color, font="Verdana 8 bold", command=set_node_4_run_target)
 node4_target_output_but.grid(row=8, column=node_column, sticky=E)
 Label(lui_gui_window, text="Output:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=11, column=node_column, sticky=W)
-
+Label(lui_gui_window, text="                -->", fg="black", bg=node_color, font="Verdana 12 bold", width=node_width).grid(row=12, column=node_column, sticky=W)
 ############################################
 
 #node 5
@@ -409,15 +429,12 @@ node5_name = Entry(lui_gui_window, width=round(node_width), bg=node_color, font=
 node5_name.grid(row=4, column=node_column)
 node5_name.insert(END, ' Node 5')
 Label(lui_gui_window, text="Params:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W)
-Label(lui_gui_window, text="Folder:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=7, column=node_column, sticky=W)
+Label(lui_gui_window, text="Output:", fg="black", bg=node_color, font="Verdana 12 bold", width=node_width).grid(row=7, column=node_column, sticky=W)
 node5_target_output = Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
 node5_target_output.insert(END, '  ../ ')
 node5_target_output.grid(row=8, column=node_column)
 node_5_output_but = Button(lui_gui_window, text="^", fg="black", bg=node_color, font="Verdana 8 bold", command=set_output_directory)
 node_5_output_but.grid(row=8, column=node_column, sticky=E)
-
-
-Label(lui_gui_window, text="Output:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=11, column=node_column, sticky=W)
 
 ############################################
 

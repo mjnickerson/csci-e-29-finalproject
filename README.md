@@ -41,17 +41,15 @@ If there are technical issues locking the file, try `$ pipenv install --ignore-p
 
 3) To run **Lui_GUI**: `$ pipenv run python lui_gui/lui_gui.py`
 
-4) Lui_GUI will use this directory as the root by default;
+4) **Try a demo example** by selecting `>Default Example<` - this demo adds watermarks to existing images; The graph will download
+a watermark image from a cloud server (s3), apply it to sample images (provided under `data/input/images`),
+and output those images.
+
+5) Lui_GUI will use this directory as the root by default;
 New Luigi graphs will be output to this directory by default, in the folder `/graphs`
 You can change this by entering or selecting a different graph path in the interface.
 
-5) 
-
-6) 
-
-7) Load a demo example by selecting 
-
-8)
+6) Scripts  must be located in the folder named `scripts` to run; Future functionality will allow for adaptive naming pathways.
 
 
 **Cookie Cutter Repo:**
@@ -62,7 +60,7 @@ This project has a public sister repo that holds the cookiecutter code to genera
 
 
 -----
-**FAQ** -
+**Notes** -
 
 
 -----
