@@ -24,12 +24,12 @@ Test | Badge
 
 Concept Wireframe:
 
-![luiGUI Concept](data/input/resources/luiGUI concept.jpg)
+![luiGUI Concept](https://github.com/mjnickerson/csci-e-29-finalproject/tree/master/data/input/resources/luiGUI_concept.jpg)
 
 
 Version 1.0.0:
 
-![luiGUI Screenshot](data/input/resources/luiGUI screenshot.jpg)
+![luiGUI Screenshot](https://github.com/mjnickerson/csci-e-29-finalproject/tree/master/data/input/resources/luiGUI_screenshot.jpg)
 
 -----
 
@@ -89,10 +89,12 @@ as well as optional input parameters.
 -----
 
 **Cookie Cutter Repo:**
-This project has a public sister repo that holds the cookiecutter code to generate luigi DAG's - it can be accessed here: https://github.com/mjnickerson/cookiecutter-luiGUI
+This project has a public sister repo that holds the cookiecutter code to generate luigi DAG's - 
+it can be accessed here: **https://github.com/mjnickerson/cookiecutter-luiGUI**
 
 
-*Optionally*, if desired it can also be called via cookiecutter on any CLI by `cookiecutter https://github.com/mjnickerson/cookiecutter-luiGUI`
+*Optionally*, if desired it can also be called via cookiecutter on any CLI by
+`$ cookiecutter https://github.com/mjnickerson/cookiecutter-luiGUI`
 
 -----
 **Install Requirements:**
@@ -116,7 +118,7 @@ This project has a public sister repo that holds the cookiecutter code to genera
 **References:**
 
 *Block Logic*
-![Concept Nodeblocks](data/input/resources/luiGUI block logic.jpg)
+![Concept Nodeblocks](https://github.com/mjnickerson/csci-e-29-finalproject/tree/master/data/input/resources/luiGUI_block_logic.jpg)
 
 -----
 
