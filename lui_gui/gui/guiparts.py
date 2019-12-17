@@ -8,6 +8,20 @@ def blank_node_box(window, box_start, box_end, node_col, node_wid, nod_color):
         Label(window, text=" ", fg="black", bg=node_col, width=node_wid, font="Verdana 14 bold").grid(
             row=row_blank, column=nod_color, sticky=W)  # blank
 
+def blank_ground(window, gnd_color, start_gnd, end_gnd, buffer_width, nm_cols, nm_width, lng_cols, lng_width, but_width):
+    for row_blank in range(start_gnd, (end_gnd + 1), 1):  # blankrows at bottom
+        for column in range (0,(10+1),2): # for buffer columns/seperators
+                Label(window, text=" ", fg="black", bg=gnd_color, width=buffer_width, font="Verdana 14 bold").grid(
+                row=row_blank, column=column, sticky=W)  # blank
+        for column in nm_cols: #for narrow columns
+            Label(window, text=" ", fg="black", bg=gnd_color, width=nm_width, font="Verdana 14 bold").grid(
+            row=row_blank, column=column, sticky=W)  # blank
+        Label(window, text=" ", fg="black", bg=gnd_color, width=lng_width, font="Verdana 14 bold").grid(
+        row=row_blank, column=lng_cols, sticky=W)  # blank
+        Label(window, text=" ", fg="black", bg=gnd_color, width=but_width, font="Verdana 14 bold").grid(
+        row=row_blank, column=13, sticky=W)  # blank
+
+
 class credits_window:
     """
     Project Credits Window

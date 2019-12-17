@@ -11,7 +11,7 @@
 **Project Presentation / Concept Deck:**
 https://drive.google.com/file/d/1HgUKMXPtUP3CI8sYotqr5AYzqXTCdgud/view
 
-*For information on planned la**ter stages of this project, please see the GUI concept in the link above.*
+*For information on planned later stages of this project, please see the GUI concept in the link above.*
  
 ------
 **Build Badges**
@@ -29,6 +29,9 @@ Concept Wireframe:
 Version 1.0.0:
 
 ![luiGUI Screenshot](https://github.com/mjnickerson/csci-e-29-finalproject/blob/master/data/input/resources/luiGUI_screenshot.jpg?raw=true)
+
+Schema 2:
+![luiGUI Screenshot](https://github.com/mjnickerson/csci-e-29-finalproject/blob/master/data/input/resources/luigui_theme_2.jpg?raw=true)
 
 -----
 
@@ -84,6 +87,7 @@ as well as optional input parameters.
 11) Scripts **must** be located in the folder named `scripts` to be run;
 *Future functionality will allow for adaptive naming pathways.*
 
+12) LuiGUI color schema can be customized - change var `color_schema` within the script, and add your own scheme. Schene 1 is default (shown below); Color 2 is a vintage game theme. *Support for expanded skins may be coming in the future (...not top priority)*. 
 
 -----
 
@@ -119,6 +123,10 @@ it can be accessed here: **https://github.com/mjnickerson/cookiecutter-luiGUI**
 
 *Block Logic*
 ![Concept Nodeblocks](https://github.com/mjnickerson/csci-e-29-finalproject/blob/master/data/input/resources/luiGUI_block_logic.jpg?raw=true)
+
+
+Luigi Official Docs - https://luigi.readthedocs.io/en/stable/
+Cookiecutter Official Docs - https://cookiecutter.readthedocs.io/en/latest/
 
 -----
 

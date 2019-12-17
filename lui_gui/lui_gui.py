@@ -5,7 +5,7 @@ from datetime import date
 from cookiecutter.main import cookiecutter
 from tkinter import *
 from tkinter import dnd, messagebox, simpledialog, filedialog, colorchooser
-from gui.guiparts import blank_node_box, credits_window, warning_graph_exists, warning_no_folder, warning_no_graph, warning_task_missing, warning_node_name_missing, warning_output_target_missing
+from gui.guiparts import blank_node_box, blank_ground, credits_window, warning_graph_exists, warning_no_folder, warning_no_graph, warning_task_missing, warning_node_name_missing, warning_output_target_missing
 from gui.guicommands import update_field, graph_path
 from src.tools import get_file_path
 
@@ -20,7 +20,6 @@ def close_gui(): #exit function
 
 def new_winF(): # new window definition
     credits_window(lui_gui_window)
-
 
 def example_gui():
     """
@@ -44,7 +43,6 @@ def example_gui():
     update_field(node5_name, 'Save Local')
     update_field(node5_target_output, os.path.join(os.getcwd(),'data','output'))
 
-
 def no_fields_empty():
     """
     Verifies if fields entered are empty, and a create/delete can proceed
@@ -59,7 +57,6 @@ def no_fields_empty():
     else:
         return True
 
-
 def try_delete():
     """
     Point of no return - checks with user if they want to delete this path
@@ -69,7 +66,6 @@ def try_delete():
         confirm_delete = messagebox.askyesno("Warning!","Are you sure you want to delete this Graph?")
         if confirm_delete:
             delete_graph()
-
 
 def set_root():
     graph_directory = filedialog.askdirectory(parent=lui_gui_window,
@@ -143,7 +139,6 @@ def generate_graph():
         os.environ['node_1_aws_access_id'] = node_1_aws_access_id.get()
     if node_1_aws_secret_key.get():
         os.environ['node_1_aws_secret_key'] = node_1_aws_secret_key.get()
-
 
     #GET GENERATOR PARAMETERS
     graph_root_gen = graph_root_entry.get()
@@ -264,7 +259,6 @@ def call_cookiecutter(full_path, root_path, cc_kwargs_dict, dir_exists=False):
     # end
     print("\nDone!")
 
-
 def run_graph():
     check_dir = graph_path(graph_root_entry, graph_name_entry)
     if no_fields_empty(): #if the path is complete
@@ -277,7 +271,6 @@ def run_graph():
             os.system(run_command) # run graph on the command line
         else:
             warning_no_graph() #warn the user it can't run, no graph
-
 
 def delete_graph():
     check_dir = graph_path(graph_root_entry, graph_name_entry)
@@ -295,78 +288,109 @@ def delete_graph():
 
 ############################################
 
-#declare gui_window
-lui_gui_window = Tk()
-lui_gui_window.title("LuiGUI - a luigi powerup")
-lui_gui_window.configure(background="grey")
-lui_gui_window.geometry("1630x410")
-
-
 #properties
-graph_name = "New_Graph"
-graph_directory = os.path.join(os.getcwd(),"graphs")
+graph_name = "New_Graph" #default
+graph_directory = os.path.join(os.getcwd(),"graphs") #default
 
 #viz settings
 node_width = 15 #column width
 node_start = 3 #row
 node_end = 13 #row
-nm_cols = [3,5,9,11]
+nm_cols = [1,3,5,9,11]
 lng_cols = 7
-field_color = "white"
+lng_width = 20
+but_width = 19
+buffer_width = 4
+start_gnd =  12 #row to start ground
+end_gnd = 14 #row to start ground
+
+
+#SET color schema
+"""
+This allows for different possible color configurations
+"""
+color_schema = 2
+
+#color schema configurations
+if color_schema == 2: #supermario theme
+    background_color = "#5b99fe"
+    field_color = "white"
+    header_color = "#89e100"
+    ground_color = "#d74701"
+    arrow_color = "#ff9d3a"
+    arrow_text_color = "#de4c01"
+    but_color = "#f8be03"
+    but_text_color = "black"
+    exit_but_color = "#ffffff"
+    exit_but_text_color = "#5b99fe"
+## ADD YOUR OWN COLOR SCHEMA HERE ###
+else: #default theme
+    background_color = "grey"
+    field_color = "white"
+    header_color = "lightgrey"
+    ground_color = "grey"
+    arrow_color = "lightgrey"
+    arrow_text_color = "black"
+    but_color = "lightgrey"
+    but_text_color = "black"
+    exit_but_color = "lightgrey"
+    exit_but_text_color = "black"
 
 #filetypes
 allowed_filetypes = [('python files', '.py'),('all files', '.*')]
 
 ############################################
-# Prompt Messages:
 
-
-# loading_window = messagebox.askyesnocancel("Graph Type", "What Type of Graph do you want to build?")
-
+#declare gui_window
+lui_gui_window = Tk()
+lui_gui_window.title("LuiGUI - a luigi powerup") #bar name
+lui_gui_window.iconbitmap(r'data/input/resources/luiGUI.ico') #bar icon
+lui_gui_window.configure(background=background_color) #main background color
+lui_gui_window.geometry("1620x410")
 
 ############################################
 
 #header
-Label(lui_gui_window, text="LuiGUI", fg="black", bg="lightgrey", font="Verdana 14 bold", width=node_width).grid(row=0, column=1, sticky=W)
+Label(lui_gui_window, text="LuiGUI", fg="black", bg=header_color, font="Verdana 14 bold", width=node_width).grid(row=0, column=1, sticky=W)
 
 #blank header
 for column_blank in range(0,12,2): # blank header
-    Label(lui_gui_window, text="", fg="black", bg="lightgrey", width=4, font="Verdana 14 bold").grid(row=0, column=column_blank, sticky=W)
+    Label(lui_gui_window, text="", fg="black", bg=header_color, width=buffer_width, font="Verdana 14 bold").grid(row=0, column=column_blank, sticky=W)
 for column_blank in nm_cols: # blank header
-    Label(lui_gui_window, text="", fg="black", bg="lightgrey", width=node_width, font="Verdana 14 bold").grid(row=0, column=column_blank, sticky=W)
-Label(lui_gui_window, text="", fg="black", bg="lightgrey", width=20, font="Verdana 14 bold").grid(row=0, column=lng_cols, sticky=W)
+    Label(lui_gui_window, text="", fg="black", bg=header_color, width=node_width, font="Verdana 14 bold").grid(row=0, column=column_blank, sticky=W)
+Label(lui_gui_window, text="", fg="black", bg=header_color, width=lng_width, font="Verdana 14 bold").grid(row=0, column=lng_cols, sticky=W)
 
 # file load label
-Label(lui_gui_window, text="        Graph Name:", fg="black", bg="lightgrey", width=node_width, font="Verdana 14 bold").grid(row=0, column=3, sticky=E)
-
-# Label(lui_gui_window, text=("'%s'" % str(graph_name)), fg="black", bg="lightgrey", width=node_width, font="Verdana 14 bold").grid(row=0, column=5, sticky=W)
-graph_name_entry = Entry(lui_gui_window, width=14, bg="lightgrey", font="Verdana 14 bold")
+Label(lui_gui_window, text="        Graph Name:", fg="black", bg=header_color, width=node_width, font="Verdana 14 bold").grid(row=0, column=3, sticky=E)
+graph_name_entry = Entry(lui_gui_window, width=14, bg=header_color, font="Verdana 14 bold")
 graph_name_entry.grid(row=0, column=5)
 graph_name_entry.insert(END, graph_name)
 
 #root directory label
-Label(lui_gui_window, text="  Graph Location:", fg="black", bg="lightgrey", width=node_width, font="Verdana 14 bold").grid(row=0, column=7, sticky=E)
-graph_root_entry = Entry(lui_gui_window, width=14, bg="lightgrey", font="Verdana 14 bold")
+Label(lui_gui_window, text="  Graph Location:", fg="black", bg=header_color, width=node_width, font="Verdana 14 bold").grid(row=0, column=7, sticky=E)
+graph_root_entry = Entry(lui_gui_window, width=14, bg=header_color, font="Verdana 14 bold")
 graph_root_entry.grid(row=0, column=9)
 graph_root_entry.insert(END, graph_directory)
-root_but = Button(lui_gui_window, text="Open", fg="black", bg="lightgrey", font="Verdana 10", command=set_root)
+root_but = Button(lui_gui_window, text="Open", fg="black", bg=header_color, font="Verdana 10", command=set_root)
 root_but.grid(row=0, column=10, sticky=W)
 
 #arrows
 for column_blank in range(2,10,2): # blank header
-    Label(lui_gui_window, text=" > ", fg="black", bg="lightgrey", font="Verdana 20 bold").grid(row=8, column=column_blank, sticky=W)
+    Label(lui_gui_window, text=" > ", fg=arrow_text_color, bg=arrow_color, font="Verdana 20 bold").grid(row=8, column=column_blank, sticky=W)
+
+#blank ground at bottom
+blank_ground(lui_gui_window, ground_color, start_gnd, end_gnd, buffer_width, nm_cols, node_width, lng_cols, lng_width, but_width)
 
 ############################################
 
 #node 1
 node_column = 1
-node_width = 15
 node_color = "lavender"
 blank_node_box(lui_gui_window, node_start, node_end, node_color, node_width, node_column) #blank
 Label(lui_gui_window, text="S3Target", fg="black", bg=node_color, font="Verdana 14 bold", width=node_width).grid(row=3, column=node_column, sticky=W)
 node1_name = Entry(lui_gui_window, width=round(node_width), bg=node_color, font="Verdana 12")
 node1_name.grid(row=4, column=node_column)
-node1_name.insert(END, ' Node 1')
+node1_name.insert(END, ' Node 1 Name')
 Label(lui_gui_window, text="Boto Credentials:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W)
 Label(lui_gui_window, text="Access ID:", fg="black", bg=node_color, font="Verdana 10 italic", width=node_width).grid(row=6, column=node_column, sticky=W)
 node_1_aws_access_id = Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
@@ -386,13 +410,12 @@ node1_target_entry.grid(row=12, column=node_column) #note: cannot combine these 
 
 #node 2
 node_column = 3
-node_width = 15
 node_color = "lightblue"
 blank_node_box(lui_gui_window, node_start, node_end, node_color, node_width, node_column) #blank
 Label(lui_gui_window, text="External Task", fg="black", bg=node_color, width=node_width, font="Verdana 14 bold").grid(row=3, column=node_column, sticky=W)
 node2_name = Entry(lui_gui_window, width=round(node_width), bg=node_color, font="Verdana 12")
 node2_name.grid(row=4, column=node_column)
-node2_name.insert(END, ' Node 2')
+node2_name.insert(END, ' Node 2 Name')
 Label(lui_gui_window, text="Parameters:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W) #NOT IMPLEMENTED IN THIS VERSION
 node2_params_entry = Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold") #NOT IMPLEMENTED IN THIS VERSION
 node2_params_entry.grid(row=6, column=node_column) #NOT IMPLEMENTED IN THIS VERSION
@@ -403,7 +426,6 @@ Label(lui_gui_window, text="                -->", fg="black", bg=node_color, fon
 
 #node 3
 node_column = 5
-node_width = 15
 node_color = "blue"
 fg_color= "white"
 blank_node_box(lui_gui_window, node_start, node_end, node_color, node_width, node_column) #blank
@@ -411,7 +433,7 @@ blank_node_box(lui_gui_window, node_start, node_end, node_color, node_width, nod
 Label(lui_gui_window, text="Task", fg=fg_color, bg=node_color, width=node_width, font="Verdana 14 bold").grid(row=3, column=node_column, sticky=W)
 node3_name = Entry(lui_gui_window, width=round(node_width), bg=node_color, fg=fg_color, font="Verdana 12")
 node3_name.grid(row=4, column=node_column)
-node3_name.insert(END, ' Node 3')
+node3_name.insert(END, ' Node 3 Name')
 
 Label(lui_gui_window, text="Parameters:", fg=fg_color, bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W)
 node3_input_params= Entry(lui_gui_window, width=round(node_width*1.5), fg=fg_color, bg=node_color, font="Verdana 8 bold")
@@ -438,38 +460,37 @@ node_3_output_but.grid(row=12, column=node_column, sticky=E)
 
 #node 4
 node_column = 7
-node_width = 20
+node_4_width = lng_width
 node_color = "lightblue"
-blank_node_box(lui_gui_window, node_start, node_end, node_color, node_width, node_column) #blank
-Label(lui_gui_window, text="External Program Task", width=node_width, fg="black", bg=node_color, font="Verdana 14 bold").grid(row=3, column=node_column, sticky=W)
-node4_name = Entry(lui_gui_window, width=round(node_width), bg=node_color, font="Verdana 12")
+blank_node_box(lui_gui_window, node_start, node_end, node_color, node_4_width, node_column) #blank
+Label(lui_gui_window, text="External Program Task", width=node_4_width, fg="black", bg=node_color, font="Verdana 14 bold").grid(row=3, column=node_column, sticky=W)
+node4_name = Entry(lui_gui_window, width=round(node_4_width), bg=node_color, font="Verdana 12")
 node4_name.grid(row=4, column=node_column)
-node4_name.insert(END, ' Node 4')
-Label(lui_gui_window, text="Parameters / Inputs:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W)
-node4_input_params= Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
+node4_name.insert(END, ' Node 4 Name')
+Label(lui_gui_window, text="Parameters / Inputs:", fg="black", bg=node_color, font="Verdana 12", width=node_4_width).grid(row=5, column=node_column, sticky=W)
+node4_input_params= Entry(lui_gui_window, width=round(node_4_width*1.5), bg=node_color, font="Verdana 8 bold")
 node4_input_params.insert(END, ' > ')
 node4_input_params.grid(row=6, column=node_column)
 node4_input_params_but = Button(lui_gui_window, text="^", fg="black", bg=node_color, font="Verdana 8 bold", command=set_node_4_input_params)
 node4_input_params_but.grid(row=6, column=node_column, sticky=E)
-Label(lui_gui_window, text="CLI Script / Arguments:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=7, column=node_column, sticky=W)
-node4_run_target= Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold")
+Label(lui_gui_window, text="CLI Script / Arguments:", fg="black", bg=node_color, font="Verdana 12", width=node_4_width).grid(row=7, column=node_column, sticky=W)
+node4_run_target= Entry(lui_gui_window, width=round(node_4_width*1.5), bg=node_color, font="Verdana 8 bold")
 node4_run_target.insert(END, ' > ')
 node4_run_target.grid(row=8, column=node_column)
 node4_target_output_but = Button(lui_gui_window, text="^", fg="black", bg=node_color, font="Verdana 8 bold", command=set_node_4_run_target)
 node4_target_output_but.grid(row=8, column=node_column, sticky=E)
-Label(lui_gui_window, text="Output:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=11, column=node_column, sticky=W)
-Label(lui_gui_window, text="                -->", fg="black", bg=node_color, font="Verdana 12 bold", width=node_width).grid(row=12, column=node_column, sticky=W)
+Label(lui_gui_window, text="Output:", fg="black", bg=node_color, font="Verdana 12", width=node_4_width).grid(row=11, column=node_column, sticky=W)
+Label(lui_gui_window, text="                -->", fg="black", bg=node_color, font="Verdana 12 bold", width=node_4_width).grid(row=12, column=node_column, sticky=W)
 ############################################
 
 #node 5
 node_column = 9
-node_width = 15
 node_color = "lavender"
 blank_node_box(lui_gui_window, node_start, node_end, node_color, node_width, node_column) #blank
 Label(lui_gui_window, text="Local Target", width=node_width, fg="black", bg=node_color, font="Verdana 14 bold").grid(row=3, column=node_column, sticky=W)
 node5_name = Entry(lui_gui_window, width=round(node_width), bg=node_color, font="Verdana 12")
 node5_name.grid(row=4, column=node_column)
-node5_name.insert(END, ' Node 5')
+node5_name.insert(END, ' Node 5 Name')
 Label(lui_gui_window, text="Parameters:", fg="black", bg=node_color, font="Verdana 12", width=node_width).grid(row=5, column=node_column, sticky=W)
 node5_params_entry = Entry(lui_gui_window, width=round(node_width*1.5), bg=node_color, font="Verdana 8 bold") #NOT IMPLEMENTED IN THIS VERSION
 node5_params_entry.grid(row=6, column=node_column) #NOT IMPLEMENTED IN THIS VERSION
@@ -483,26 +504,23 @@ node_5_output_but.grid(row=8, column=node_column, sticky=E)
 
 ############################################
 
-# Execution Buttons
-but_width = 19
+test_but = Button(lui_gui_window, text="LuiGUI", fg="black", bg=header_color, font="Verdana 14 bold", height=1, borderwidth=0, width=node_width, command=new_winF)
+test_but.grid(row=0, column=1, sticky=W)
 
-but_exit = Button(lui_gui_window, text="> Exit < ", font="Verdana 10", width=21, command=close_gui)
+but_exit = Button(lui_gui_window, text="> Exit < ", font="Verdana 10 bold", fg=exit_but_text_color, bg=exit_but_color, width=but_width, command=close_gui)
 but_exit.grid(row=2, column=11, sticky=W)
 
-but_del = Button(lui_gui_window, text="> Delete Graph! <", fg="red", font="Verdana 10 bold", width=but_width, command=try_delete)
+but_del = Button(lui_gui_window, text="> Delete Graph <", fg="red", bg=but_color, font="Verdana 10 bold", width=but_width, command=try_delete)
 but_del.grid(row=4, column=11, sticky=W)
 
-but_example = Button(lui_gui_window, text="> Default Example <", font="Verdana 10", width=21, command=example_gui)
+but_example = Button(lui_gui_window, text="> Default Example <", fg=but_text_color, bg=but_color, font="Verdana 10", width=21, command=example_gui)
 but_example.grid(row=6, column=11, sticky=W)
 
-but_generate = Button(lui_gui_window, text="> Generate Graph! <", font="Verdana 10 bold", width=but_width, command=generate_graph)
-but_generate.grid(row=10, column=11, sticky=W)
+but_generate = Button(lui_gui_window, text="> Generate Graph! <", fg=but_text_color, bg=but_color, font="Verdana 10 bold", width=but_width, command=generate_graph)
+but_generate.grid(row=9, column=11, sticky=W)
 
-but_run = Button(lui_gui_window, text="> Run Graph! <", font="Verdana 10 bold", width=but_width, command=run_graph)
-but_run.grid(row=12, column=11, sticky=W)
-
-test_but = Button(lui_gui_window, text="LuiGUI", fg="black", bg="lightgrey", font="Verdana 14 bold", height=1, borderwidth=0, width=node_width, command=new_winF)
-test_but.grid(row=0, column=1, sticky=W)
+but_run = Button(lui_gui_window, text="> Run Graph! <", fg=but_text_color, font="Verdana 10 bold", bg=but_color, width=but_width, command=run_graph)
+but_run.grid(row=11, column=11, sticky=W)
 
 ############################################
 
