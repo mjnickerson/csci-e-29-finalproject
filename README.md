@@ -30,7 +30,7 @@ Version 1.0.0:
 
 ![luiGUI Screenshot](https://github.com/mjnickerson/csci-e-29-finalproject/blob/master/data/input/resources/luiGUI_screenshot.jpg?raw=true)
 
-Schema 2:
+Color Schema 2:
 ![luiGUI Screenshot](https://github.com/mjnickerson/csci-e-29-finalproject/blob/master/data/input/resources/luigui_theme_2.jpg?raw=true)
 
 -----
@@ -73,7 +73,7 @@ Schema 2:
 
 7) Update entry fields for the node blocks, including scripts to run, input and output targets,
 as well as optional input parameters.
-   
+      
     - If either Task or Local Target Output are left blank, they will output to `../data` by default.
     
     - ExternalProgramTask can be skipped! (along with its Local Target Output) - just leave their fields blank.
@@ -84,10 +84,16 @@ as well as optional input parameters.
 
 10) When done with the graph make sure to `> Delete Graph <` to trash it - no need to keep old graphs lying around!
 
-11) Scripts **must** be located in the folder named `scripts` to be run;
+11) **To make changes to an existing graph** (already generated) you **must *delete* the existing graph and generate a new one**
+by selecting `> Delete Graph <` with the existing graph name selected and `> Generate Graph <` with your new changes.  
+Lui_GUI cannot adaptively update an existing graph's code *(graph code is generated ONLY during `> Generate Graph <`)*.
+
+12) Scripts **must** be located in the folder named `scripts` to be run;
 *Future functionality will allow for adaptive naming pathways.*
 
-12) LuiGUI color schema can be customized - change var `color_schema` within the script, and add your own scheme. Schene 1 is default (shown above); Color 2 is a familiar vintage game theme. *Support for expanded skins may be coming in the future (...not top priority)*. 
+13) LuiGUI color schema can be customized - change var `color_schema` within the script, and add your own scheme. 
+Scheme 1 is default (shown above); Color Scheme 2 is a familiar vintage game theme. 
+*Support for expanded skins might be coming in the future (...not top priority)*. 
 
 -----
 
@@ -124,9 +130,9 @@ it can be accessed here: **https://github.com/mjnickerson/cookiecutter-luiGUI**
 ![Concept Nodeblocks](https://github.com/mjnickerson/csci-e-29-finalproject/blob/master/data/input/resources/luiGUI_block_logic.jpg?raw=true)
 
 
-Luigi Official Docs - https://luigi.readthedocs.io/en/stable/
+- Luigi Official Docs - https://luigi.readthedocs.io/en/stable/
 
-Cookiecutter Official Docs - https://cookiecutter.readthedocs.io/en/latest/
+- Cookiecutter Official Docs - https://cookiecutter.readthedocs.io/en/latest/
 
 -----
 [Micah Nickerson](mailto:min021@g.harvard.edu) - [Harvard University Extension](https://www.extension.harvard.edu/academics/graduate-degrees/data-science-degree) - Fall 2019
