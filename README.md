@@ -87,7 +87,7 @@ as well as optional input parameters.
 11) Scripts **must** be located in the folder named `scripts` to be run;
 *Future functionality will allow for adaptive naming pathways.*
 
-12) LuiGUI color schema can be customized - change var `color_schema` within the script, and add your own scheme. Schene 1 is default (shown below); Color 2 is a vintage game theme. *Support for expanded skins may be coming in the future (...not top priority)*. 
+12) LuiGUI color schema can be customized - change var `color_schema` within the script, and add your own scheme. Schene 1 is default (shown above); Color 2 is a familiar vintage game theme. *Support for expanded skins may be coming in the future (...not top priority)*. 
 
 -----
 
@@ -118,7 +118,6 @@ it can be accessed here: **https://github.com/mjnickerson/cookiecutter-luiGUI**
     - atomicwrites
     - pillow
 -----
------
 **References:**
 
 *Block Logic*
@@ -126,8 +125,8 @@ it can be accessed here: **https://github.com/mjnickerson/cookiecutter-luiGUI**
 
 
 Luigi Official Docs - https://luigi.readthedocs.io/en/stable/
+
 Cookiecutter Official Docs - https://cookiecutter.readthedocs.io/en/latest/
 
 -----
-
 [Micah Nickerson](mailto:min021@g.harvard.edu) - [Harvard University Extension](https://www.extension.harvard.edu/academics/graduate-degrees/data-science-degree) - Fall 2019
